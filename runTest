@@ -15,6 +15,7 @@ LOGSTORE=`getSym log_store`
 echo "kernel $KERN"
 make testAfl testRoot.cpio.gz || exit 1
 ./testAfl $AFL/afl-qemu-system-trace \
+    --accel tcg,thread=single \
     -L $AFL/qemu_mode/qemu/pc-bios \
     -kernel $KERN/bzImage -initrd ./testRoot.cpio.gz \
     -m 64M -nographic -append "console=ttyS0" \
